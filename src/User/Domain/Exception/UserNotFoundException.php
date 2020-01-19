@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace Acme\MessengerPlayground\User\Domain\Exception;
 
+use Acme\MessengerPlayground\Core\Domain\Exception\DomainException;
 use Acme\MessengerPlayground\User\Domain\ValueObject\UserIdentifier;
-use Exception;
 use Throwable;
 
-final class UserNotFoundException extends Exception
+final class UserNotFoundException extends DomainException
 {
     public function __construct(UserIdentifier $userIdentifier, Throwable $previous = null)
     {

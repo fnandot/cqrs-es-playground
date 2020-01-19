@@ -4,13 +4,12 @@ declare(strict_types = 1);
 
 namespace Acme\MessengerPlayground\User\Application;
 
-use Acme\MessengerPlayground\User\Domain\Aggregate\User;
 use Acme\MessengerPlayground\Core\Domain\Event\DomainEventBus;
+use Acme\MessengerPlayground\User\Domain\Aggregate\User;
 use Acme\MessengerPlayground\User\Domain\Repository\UserRepository;
 use Acme\MessengerPlayground\User\Domain\Service\UserIdentityProvider;
 use Acme\MessengerPlayground\User\Domain\ValueObject\Email;
 use Acme\MessengerPlayground\User\Domain\ValueObject\Password;
-use Acme\MessengerPlayground\User\Domain\ValueObject\UserIdentifier;
 
 final class RegisterUserCommandHandler
 {
