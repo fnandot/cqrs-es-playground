@@ -4,9 +4,6 @@ namespace Acme\MessengerPlayground\User\Infrastructure\Framework\Controller;
 
 use Acme\MessengerPlayground\User\Application\RegisterUserCommand;
 use Acme\MessengerPlayground\User\Application\RegisterUserCommandHandler;
-use MongoDB\Driver\Command;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
