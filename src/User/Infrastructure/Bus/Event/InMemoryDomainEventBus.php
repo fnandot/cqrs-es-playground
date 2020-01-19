@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace Acme\MessengerPlayground\User\Infrastructure\Bus\Event;
 
-use Acme\MessengerPlayground\User\Domain\Event\Event;
-use Acme\MessengerPlayground\User\Domain\Event\EventBus;
+use Acme\MessengerPlayground\Core\Domain\Event\DomainEvent;
+use Acme\MessengerPlayground\Core\Domain\Event\DomainEventBus;
 
-final class InMemoryEventBus implements EventBus
+final class InMemoryDomainEventBus implements DomainEventBus
 {
-    /** @var Event[] */
+    /** @var DomainEvent[] */
     private array $dispatchedEvents;
 
     public function __construct()
@@ -17,13 +17,13 @@ final class InMemoryEventBus implements EventBus
         $this->dispatchedEvents = [];
     }
 
-    public function dispatch(Event ...$events): void
+    public function dispatch(DomainEvent ...$events): void
     {
         $this->dispatchedEvents += $events;
     }
 
     /**
-     * @return Event[]
+     * @return DomainEvent[]
      */
     public function pullDispatchedEvents(): array
     {

@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 
-namespace Acme\MessengerPlayground\User\Domain\Event;
+namespace Acme\MessengerPlayground\Core\Domain\Event;
 
 use Acme\MessengerPlayground\User\Domain\ValueObject\EventIdentifier;
 use DateTimeImmutable;
 
-interface Event
+interface DomainEvent
 {
     public function identifier(): EventIdentifier;
 

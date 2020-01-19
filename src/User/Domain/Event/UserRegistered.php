@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Acme\MessengerPlayground\User\Domain\Event;
+namespace Acme\MessengerPlayground\Core\Domain\Event;
 
 use Acme\MessengerPlayground\User\Domain\ValueObject\Email;
 use Acme\MessengerPlayground\User\Domain\ValueObject\EventIdentifier;
@@ -10,7 +10,7 @@ use Acme\MessengerPlayground\User\Domain\ValueObject\Password;
 use Acme\MessengerPlayground\User\Domain\ValueObject\UserIdentifier;
 use DateTimeImmutable;
 
-final class UserRegistered implements Event
+final class UserRegistered implements DomainEvent
 {
     private EventIdentifier $identifier;
 

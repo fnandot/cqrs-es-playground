@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Acme\MessengerPlayground\User\Application;
 
 use Acme\MessengerPlayground\User\Domain\Aggregate\User;
-use Acme\MessengerPlayground\User\Domain\Event\EventBus;
+use Acme\MessengerPlayground\Core\Domain\Event\DomainEventBus;
 use Acme\MessengerPlayground\User\Domain\Repository\UserRepository;
 use Acme\MessengerPlayground\User\Domain\ValueObject\Email;
 use Acme\MessengerPlayground\User\Domain\ValueObject\Password;
@@ -15,9 +15,9 @@ final class RegisterUserCommandHandler
 {
     private UserRepository $repository;
 
-    private EventBus $eventBus;
+    private DomainEventBus $eventBus;
 
-    public function __construct(UserRepository $repository, EventBus $eventBus)
+    public function __construct(UserRepository $repository, DomainEventBus $eventBus)
     {
         $this->repository = $repository;
         $this->eventBus   = $eventBus;
@@ -35,6 +35,6 @@ final class RegisterUserCommandHandler
         );
 
         $this->repository->save($user);
-        $this->eventBus->dispatch(...$user->pullEventStream());
+        $this->eventBus->dispatch(...$user->pullDomainEvents());
     }
 }
