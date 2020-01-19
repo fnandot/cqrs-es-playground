@@ -1,0 +1,45 @@
+version: '3.5'
+
+services:
+  nginx:
+    image: fnandot/nginx:1.11
+    depends_on:
+      - php-fpm
+    ports:
+      - 8080:80
+    volumes:
+      - type: bind
+        source: ${PWD}
+        target: /app
+        read_only: true
+
+  php-fpm:
+    image: fnandot/php-fpm:7.4-dev
+    volumes:
+      - type: bind
+        source: ${PWD}
+        target: /app
+        read_only: false
+    env_file:
+      - docker.env
+
+  kibana:
+    build: docker/kibana
+    ports:
+      - 5601:5601
+
+  elasticsearch:
+    image: elasticsearch:5.5
+    ports:
+      - 9200:9200
+
+  rabbitmq:
+    build: docker/rabbitmq
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "B53FEDC5F3F44E94B701FBEE9193D554"
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - 15672:15672
+      - 5672:5672
