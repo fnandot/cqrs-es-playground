@@ -4,44 +4,30 @@ declare(strict_types = 1);
 
 namespace Acme\MessengerPlayground\User\Domain\ValueObject;
 
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
+use Acme\MessengerPlayground\Core\Domain\ValueObject\AggregateIdentifier;
 
-final class UserIdentifier
+final class UserIdentifier implements AggregateIdentifier
 {
-    private UuidInterface $value;
+    private string $value;
 
-    public static function generate(): self
-    {
-        return new self(Uuid::uuid4());
-    }
-
-    public static function fromString(string $value): self
-    {
-        return new self(Uuid::fromString($value));
-    }
-
-    private function __construct(UuidInterface $value)
+    public function __construct(string $value)
     {
         $this->value = $value;
     }
 
     public function toString(): string
     {
-        return $this->value->toString();
+        return $this->value;
     }
 
-    public function equals($other): bool
+    public function equals(AggregateIdentifier $other): bool
     {
-        if (!$other instanceof self) {
-            return false;
-        }
-
-        return $this->value->equals($other->value);
+        return $other instanceof static
+            && $this->value === $other->value;
     }
 
     public function __toString(): string
     {
-        return $this->value->toString();
+        return $this->toString();
     }
 }

@@ -6,7 +6,6 @@ namespace Acme\MessengerPlayground\User\Domain\Aggregate;
 
 use Acme\MessengerPlayground\Core\Domain\Aggregate\EventSourcedAggregateRoot;
 use Acme\MessengerPlayground\Core\Domain\Event\DomainEvent;
-use Acme\MessengerPlayground\Core\Domain\Event\DomainEventStream;
 use Acme\MessengerPlayground\Core\Domain\Event\UserRegistered;
 use Acme\MessengerPlayground\User\Domain\ValueObject\Email;
 use Acme\MessengerPlayground\User\Domain\ValueObject\EventIdentifier;
@@ -29,9 +28,8 @@ class User extends EventSourcedAggregateRoot
         $instance
             ->recordThat(
             new UserRegistered(
-                EventIdentifier::generate(),
-                new DateTimeImmutable(),
                 $id,
+                new DateTimeImmutable(),
                 $email,
                 $password
             )
@@ -70,7 +68,7 @@ class User extends EventSourcedAggregateRoot
 
     private function applyUserRegistered(UserRegistered $userRegistered): void
     {
-        $this->id       = $userRegistered->id();
+        $this->id       = $userRegistered->aggregateIdentifier();
         $this->email    = $userRegistered->email();
         $this->password = $userRegistered->password();
     }
