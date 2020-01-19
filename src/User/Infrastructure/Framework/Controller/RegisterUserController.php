@@ -12,20 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegisterUserController
 {
-    private RegisterUserCommandHandler $commandHandler;
-
-    public function __construct(RegisterUserCommandHandler $commandHandler)
-    {
-        $this->commandHandler = $commandHandler;
-    }
-
     /**
-     * @Route("/users", name="register_user")
+     * @Route("/users", name="register", methods={"POST"})
      */
-    public function __invoke(RegisterUserCommand $command): Response
+    public function __invoke(RegisterUserCommand $command, RegisterUserCommandHandler $handle): Response
     {
-        ($this->commandHandler)($command);
+        $handle($command);
 
-        return new Response('', Response::HTTP_ACCEPTED);
+        return Response::create(null, Response::HTTP_ACCEPTED);
     }
 }

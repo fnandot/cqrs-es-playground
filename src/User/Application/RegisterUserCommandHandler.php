@@ -34,6 +34,7 @@ final class RegisterUserCommandHandler
             $password
         );
 
+        $this->repository->save($user);
         $this->eventBus->dispatch(...$user->pullEventStream());
     }
 }
