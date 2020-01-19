@@ -2,4 +2,4 @@ controllers:
     resource: ../../src/User/Infrastructure/Framework/Controller
     type: annotation
     prefix: /api
-    name_prefix: user
+    name_prefix: user_
